@@ -28,7 +28,7 @@ jobs:
         shell: bash
 
       - name: Install Node dependencies
-        run: /bin/zsh -i -c "cd Source/Aura && npm ci && cd ../.."
+        run: /bin/zsh -i -c "cd Source/Aura && npm install && cd ../.."
         shell: bash
 
       - name: CMake clang debug configuration
@@ -80,7 +80,10 @@ jobs:
         shell: powershell
 
       - name: Install Node dependencies
-        run: Set-Location Source/Aura && npm ci && Set-Location ../..
+        run: |
+          Set-Location Source/Aura
+          npm install
+          Set-Location ../..
         shell: powershell
 
       - name: CMake MSVC debug configuration
@@ -149,8 +152,12 @@ jobs:
         run: apt-get install -y ninja-build
         shell: bash
 
+      - name: Install Node
+        run: apt-get install -y nodejs npm
+        shell: bash
+
       - name: Install Node dependencies
-        run: cd Source/Aura && npm ci && cd ../..
+        run: cd Source/Aura && npm install && cd ../..
         shell: bash
       
       - name: CMake clang debug configuration
