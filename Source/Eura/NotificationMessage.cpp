@@ -27,10 +27,10 @@ namespace Eura
         Serialize(object, static_cast<const Message&>(notification_message));
         object.fields.emplace_back("method", notification_message.method);
         if(notification_message.params.has_value())
-            notification_message.params->visit([&object](auto&& params)
+            std::visit([&object](auto&& params)
             {
                 object.fields.emplace_back("params", std::move(params));
-            });
+            }, *notification_message.params);
     }
 }
 

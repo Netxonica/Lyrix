@@ -7,7 +7,7 @@ namespace Eura
     auto Deserialize(Json::Object& object, ResponseMessage& response_message) noexcept -> void
     {
         Deserialize(object, static_cast<Message&>(response_message));
-        object.Retrieve("id").visit([&response_message](auto&& id)
+        std::visit([&response_message](auto&& id)
         {
             using T = std::decay_t<decltype(id)>;
             if constexpr(std::is_same_v<T, Json::String> or std::is_same_v<T, Json::Integer> or std
@@ -17,7 +17,7 @@ namespace Eura
                 response_message.id = static_cast<Json::Integer>(id);
             else
                 std::abort();
-        });
+        }, object.Retrieve("id"));
         if(object.Contains("result"))
         {
             if(object.Contains("error"))
@@ -35,10 +35,10 @@ namespace Eura
     auto Serialize(Json::Object& object, ResponseMessage& response_message) noexcept -> void
     {
         Serialize(object, static_cast<const Message&>(response_message));
-        response_message.id.visit([&object](auto&& id)
+        std::visit([&object](auto&& id)
         {
             object.fields.emplace_back("id", id);
-        });
+        }, response_message.id);
         if(response_message.result.has_value())
         {
             if(response_message.error.has_value())

@@ -7,7 +7,7 @@ namespace Eura
     auto Deserialize(Json::Object& object, RequestMessage& request_message) noexcept -> void
     {
         Deserialize(object, static_cast<Message&>(request_message));
-        object.Retrieve("id").visit([&request_message](auto&& id)
+        std::visit([&request_message](auto&& id)
         {
             using T = std::decay_t<decltype(id)>;
             if constexpr(std::is_same_v<T, Json::String> or std::is_same_v<T, Json::Integer>)
@@ -16,7 +16,7 @@ namespace Eura
                 request_message.id = static_cast<Json::Integer>(id);
             else
                 std::abort();
-        });
+        }, object.Retrieve("id"));
         const Json::Any& method = object.Retrieve("method");
         if(not method.IsString())
             std::abort();
@@ -36,16 +36,16 @@ namespace Eura
     auto Serialize(Json::Object& object, RequestMessage& request_message) noexcept -> void
     {
         Serialize(object, static_cast<const Message&>(request_message));
-        request_message.id.visit([&object](auto&& id)
+        std::visit([&object](auto&& id)
         {
             object.fields.emplace_back("id", id);
-        });
+        }, request_message.id);
         object.fields.emplace_back("method", request_message.method);
         if(request_message.params.has_value())
-            request_message.params->visit([&object](auto&& params)
+            std::visit([&object](auto&& params)
             {
                 object.fields.emplace_back("params", std::move(params));
-            });
+            }, *request_message.params);
     }
 }
 

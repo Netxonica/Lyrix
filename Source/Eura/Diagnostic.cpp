@@ -68,10 +68,10 @@ namespace Eura
         if(diagnostic.severity.has_value())
             object.fields.emplace_back("severity", *diagnostic.severity);
         if(diagnostic.code.has_value())
-            diagnostic.code->visit([&object](auto&& code)
+            std::visit([&object](auto&& code)
             {
                 object.fields.emplace_back("code", code);
-            });
+            }, *diagnostic.code);
         if(diagnostic.codeDescription.has_value())
             Serialize(object.NestedObject("codeDescription"), *diagnostic.codeDescription);
         if(diagnostic.source.has_value())
@@ -97,10 +97,10 @@ namespace Eura
             }
         }
         if(diagnostic.data.has_value())
-            diagnostic.data->visit([&object](auto&& data)
+            std::visit([&object](auto&& data)
             {
                 object.fields.emplace_back("data", std::move(data));
-            });
+            }, *diagnostic.data);
     }
 }
 

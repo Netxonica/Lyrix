@@ -26,10 +26,10 @@ namespace Eura
     {
         Serialize(object, static_cast<const TextDocumentIdentifier&>(
         optional_versioned_text_document_identifier));
-        optional_versioned_text_document_identifier.version.visit([&object](auto&& version)
+        std::visit([&object](auto&& version)
         {
             object.fields.emplace_back("version", version);
-        });
+        }, optional_versioned_text_document_identifier.version);
     }
 }
 

@@ -100,11 +100,11 @@ namespace Eura
             Json::Array& documentChanges = object.NestedArray("documentChanges");
             for(const std::variant<TextDocumentEdit, CreateFile, RenameFile, DeleteFile>&
             documentChange : *workspace_edit.documentChanges)
-                documentChange.visit([&documentChanges](auto&& change)
+                std::visit([&documentChanges](auto&& change)
                 {
                     documentChanges.emplace_back(Json::Object{});
                     Serialize(documentChanges.back().As<Json::Object>(), change);
-                });
+                }, documentChange);
         }
         if(workspace_edit.changeAnnotations.has_value())
         {

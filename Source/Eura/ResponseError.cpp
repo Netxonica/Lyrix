@@ -19,10 +19,10 @@ namespace Eura
         object.fields.emplace_back("code", response_error.code);
         object.fields.emplace_back("message", response_error.message);
         if(response_error.data.has_value())
-            response_error.data->visit([&object](auto&& data)
+            std::visit([&object](auto&& data)
             {
                 object.fields.emplace_back("data", std::move(data));
-            });
+            }, *response_error.data);
     }
 }
 

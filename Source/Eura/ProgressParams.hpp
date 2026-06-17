@@ -33,10 +33,10 @@ namespace Eura
     template<class T> auto Serialize(Json::Object& object, const ProgressParams<T>& progress_params
     ) noexcept -> void
     {
-        progress_params.token.visit([&object](auto&& token)
+        std::visit([&object](auto&& token)
         {
             object.fields.emplace_back("token", token);
-        });
+        }, progress_params.token);
         object.fields.emplace_back(object.NestedObject("value"), progress_params.value);
     }
 }

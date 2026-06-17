@@ -19,10 +19,10 @@ namespace Eura
 
     auto Serialize(Json::Object& object, const CancelParams& cancel_params) noexcept -> void
     {
-        cancel_params.id.visit([&object](auto&& id)
+        std::visit([&object](auto&& id)
         {
             object.fields.emplace_back("id", id);
-        });
+        }, cancel_params.id);
     }
 }
 
