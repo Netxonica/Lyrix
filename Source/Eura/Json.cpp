@@ -24,7 +24,7 @@ namespace Eura::Json
             Exponent_sign = 7u,
             Exponent = 8u
         };
-        Type type;
+        Type type = Type::Colon;
         using enum Context;
         Context mode = General;
         for(const char character : content)
@@ -486,9 +486,9 @@ namespace Eura::Json
                 }
             };
             std::string literal, hex;
-            const char* offset;
+            const char* offset = nullptr;
             std::size_t length = 0uz;
-            char first;
+            char first = 0;
             bool mutated = false;
             enum class [[nodiscard]] Context : std::uint8_t
             {
