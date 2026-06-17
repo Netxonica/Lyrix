@@ -1,6 +1,7 @@
 // Copyright 2026 Netxonica. All Rights Reserved.
 #if lyrix_major >= 0 and lyrix_middle >= 0 and lyrix_minor >= 1
 #include "Nyra/System.hpp"
+#include <cstdlib>
 
 namespace Nyra
 {
@@ -16,6 +17,7 @@ namespace Nyra
             case Windows:
                 return "windows";
         }
+        std::abort();
     }
 }
 
