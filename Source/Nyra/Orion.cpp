@@ -12,7 +12,7 @@ namespace Nyra
 
     [[nodiscard]] auto Orion::Elyra() const noexcept -> std::string
     {
-        return std::string(m_name) + ".orion/" + m_name + ".elyra";
+        return std::string(m_name) + ".orion/" + std::string(m_name) + ".elyra";
     }
 
     [[nodiscard]] auto Orionify(const std::string_view name) noexcept -> std::optional<Orion>
@@ -26,7 +26,7 @@ namespace Nyra
         }
         else if(not File::Exists(base + name + ".elyra"))
         {
-            std::make_unique<Error>(20uz, name, base + name + ".elyra")->Report();
+            std::make_unique<Error>(20uz, name, base + std::string(name) + ".elyra")->Report();
             return std::nullopt;
         }
         return Orion(name);
