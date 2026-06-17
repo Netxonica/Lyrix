@@ -2,6 +2,7 @@
 #if lyrix_major >= 0 and lyrix_middle >= 0 and lyrix_minor >= 1
 #ifndef lyrix_header_guard_eura_any
 #define lyrix_header_guard_eura_any
+#include <cstdlib>
 #include <variant>
 #include <optional>
 #include "Eura/Null.hpp"
