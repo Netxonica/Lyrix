@@ -26,6 +26,7 @@ namespace Nyra
                         return false;
                     case '_':
                     case $lyrix_alphanumeric:
+                    break;
                 }
         }
         return true;
