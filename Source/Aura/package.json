@@ -1,0 +1,44 @@
+{
+    "name": "aura",
+    "displayName": "Lyrix Language Support",
+    "version": "0.0.1",
+    "description": "The official LSP client of the Lyrix programming language",
+    "main": "./Output/Client.js",
+    "activationEvents":
+    [
+        "onStartupFinished"
+    ],
+    "scripts": {
+        "compile": "tsc -p .",
+        "watch": "tsc -w -p ."
+    },
+    "contributes": {
+        "languages": [
+            {
+                "id": "Elyra",
+                "aliases": ["Elyra", "elyra"],
+                "extensions": [
+                    ".elyra"
+                ],
+                "configuration": "./Elyra/Configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "Elyra",
+                "scopeName": "source.elyra",
+                "path": "./Elyra/Syntax.tmLanguage.json"
+            }
+        ]
+    },
+    "engines": {
+        "vscode": "^1.120.0"
+    },
+    "dependencies": {
+        "@types/node": "^25.9.3",
+        "@types/vscode": "^1.120.0",
+        "typescript": "^6.0.3",
+        "vscode-languageclient": "^10.0.0",
+        "vscode-languageserver-protocol": "^3.18.0"
+    }
+}

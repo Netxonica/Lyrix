@@ -1,0 +1,12 @@
+// Copyright 2026 Netxonica. All Rights Reserved.
+#if lyrix_major >= 0 and lyrix_middle >= 0 and lyrix_minor >= 1
+#ifndef lyrix_header_guard_nyra_cli
+#define lyrix_header_guard_nyra_cli
+
+namespace Nyra::CLI
+{
+    auto Process(int argc, char** argv) noexcept -> void;
+}
+
+#endif
+#endif

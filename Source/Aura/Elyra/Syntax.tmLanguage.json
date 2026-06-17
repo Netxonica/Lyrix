@@ -1,0 +1,79 @@
+{
+    "scopeName": "source.elyra",
+    "patterns":
+    [
+        {
+            "include": "#comment"
+        },
+        {
+            "include": "#punctuation"
+        },
+        {
+            "include": "#operator"
+        },
+        {
+            "include": "#keyword"
+        },
+        {
+            "include": "#number"
+        }
+    ],
+    "repository":
+    {
+        "comment":
+        {
+            "patterns":
+            [
+                {
+                    "name": "comment.line.double-slash.elyra",
+                    "match": "//.*$"
+                },
+                {
+                    "name": "comment.block.elyra",
+                    "begin": "/\\*",
+                    "end": "\\*/"
+                }
+            ]
+        },
+        "punctuation":
+        {
+            "patterns":
+            [
+                {
+                    "name": "punctuation.separator.elyra",
+                    "match": "[;]"
+                }
+            ]
+        },
+        "operator":
+        {
+            "patterns":
+            [
+                {
+                    "name": "keyword.operator.elyra",
+                    "match": "[=]"
+                }
+            ]
+        },
+        "keyword":
+        {
+            "patterns":
+            [
+                {
+                    "name": "keyword.control.elyra",
+                    "match": "\\b(jobs)\\b"
+                }
+            ]
+        },
+        "number":
+        {
+            "patterns":
+            [
+                {
+                    "name": "constant.numeric.elyra",
+                    "match": "\\b\\d+(\\.\\d+)?\\b"
+                }
+            ]
+        }
+    }
+}
