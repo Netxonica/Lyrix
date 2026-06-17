@@ -209,9 +209,9 @@ namespace Eura::Json
                         case Type::Natural:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Uinteger output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             array.emplace_back(output);
                         }
@@ -219,9 +219,9 @@ namespace Eura::Json
                         case Type::Integer:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Integer output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             array.emplace_back(output);
                         }
@@ -229,9 +229,9 @@ namespace Eura::Json
                         case Type::Real:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Decimal output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             array.emplace_back(output);
                         }
@@ -268,9 +268,9 @@ namespace Eura::Json
                         case Type::Natural:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Uinteger output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             array.emplace_back(output);
                         }
@@ -278,9 +278,9 @@ namespace Eura::Json
                         case Type::Integer:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Integer output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             array.emplace_back(output);
                         }
@@ -288,9 +288,9 @@ namespace Eura::Json
                         case Type::Real:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Decimal output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             array.emplace_back(output);
                         }
@@ -390,9 +390,9 @@ namespace Eura::Json
                         case Type::Natural:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Uinteger output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             object.fields.back().second = output;
                         }
@@ -400,9 +400,9 @@ namespace Eura::Json
                         case Type::Integer:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Integer output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             object.fields.back().second = output;
                         }
@@ -410,9 +410,9 @@ namespace Eura::Json
                         case Type::Real:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Decimal output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             object.fields.back().second = output;
                         }
@@ -731,9 +731,9 @@ namespace Eura::Json
                         case Type::Natural:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Uinteger output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             root.fields.back().second = output;
                         }
@@ -741,9 +741,9 @@ namespace Eura::Json
                         case Type::Integer:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Integer output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             root.fields.back().second = output;
                         }
@@ -751,9 +751,9 @@ namespace Eura::Json
                         case Type::Real:
                         {
                             const String& number = token.Get(lexer.slices);
+                            const char* nend = number.data() + number.size();
                             Decimal output;
-                            if(std::from_chars(number.data(), number.end(), output).ptr not_eq
-                            number.end())
+                            if(std::from_chars(number.data(), nend, output).ptr not_eq nend)
                                 std::abort();
                             root.fields.back().second = output;
                         }
