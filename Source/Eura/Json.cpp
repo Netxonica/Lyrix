@@ -349,6 +349,7 @@ namespace Eura::Json
                         break;
                         case Type::MutatedString:
                             object.fields.emplace_back(token.Get(strings), Any{});
+                        break;
                         case Type::EndObject:
                             return object;
                     }
