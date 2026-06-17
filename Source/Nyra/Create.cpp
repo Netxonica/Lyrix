@@ -24,7 +24,7 @@ namespace Nyra
         else if(not Directory::Create(path))
             std::make_unique<Error>(17uz, name, path)->Report();
         else if(not File::Write(path + std::string(name) + ".elyra", "jobs = " + std::to_string(jobs) + ";"))
-            std::make_unique<Error>(18uz, name, path + name + ".elyra")->Report();
+            std::make_unique<Error>(18uz, name, path + std::string(name) + ".elyra")->Report();
         else
             std::println(stdout, "the project {}{}{} was successfully created", Lumina::Style::Data
             , name, Lumina::Style::Normal);
