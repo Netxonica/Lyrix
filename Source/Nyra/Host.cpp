@@ -2,7 +2,7 @@
 #if lyrix_major >= 0 and lyrix_middle >= 0 and lyrix_minor >= 1
 #include "Nyra/Host.hpp"
 #include <memory>
-#ifdef lyxin_windows
+#ifdef lyrix_windows
 #include <windows.h>
 #else
 #include <sys/utsname.h>
@@ -26,7 +26,7 @@ namespace Nyra
 
     [[nodiscard]] auto Hostify() noexcept -> std::optional<Host>
     {
-        #ifdef lynix_windows
+        #ifdef lyrix_windows
         SYSTEM_INFO info;
         GetNativeSystemInfo(&info);
         Architecture arch = Architecture::Amd64;
