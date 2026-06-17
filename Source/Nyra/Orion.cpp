@@ -24,7 +24,7 @@ namespace Nyra
             std::make_unique<Error>(19uz, name, base)->Report();
             return std::nullopt;
         }
-        else if(not File::Exists(base + name + ".elyra"))
+        else if(not File::Exists(base + std::string(name) + ".elyra"))
         {
             std::make_unique<Error>(20uz, name, base + std::string(name) + ".elyra")->Report();
             return std::nullopt;
