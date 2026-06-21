@@ -857,7 +857,10 @@ namespace Eura::Json
                 Serialize(field.second.As<Array>(), content);
             content.append(1uz, ',');
         }
-        content.back() == ',' ? (void)(content.back() = '}') : (void)content.append(1uz, '}');
+        if(content.back() == ',')
+            content.back() = '}';
+        else
+            content.append(1uz, '}');
     }
 
     static auto Serialize(const Array& value, std::string& content) noexcept -> void
@@ -883,12 +886,16 @@ namespace Eura::Json
                 Serialize(field.As<Array>(), content);
             content.append(1uz, ',');
         }
-        content.back() == ',' ? (void)(content.back() = ']') : (void)content.append(1uz, ']');
+        if(content.back() == ',')
+            content.back() = ']';
+        else
+            content.append(1uz, ']');
     }
 
     [[nodiscard]] auto Serialize(const Root& root) noexcept -> std::string
     {
-        std::string content{1uz, '{'};
+        std::string content;
+        content.append(1uz, '{');
         for(const std::pair<String, Any>& field : root.fields)
         {
             content.append(1uz, '"');
@@ -912,7 +919,11 @@ namespace Eura::Json
                 Serialize(field.second.As<Array>(), content);
             content.append(1uz, ',');
         }
-        content.back() == ',' ? (void)(content.back() = '}') : (void)content.append(1uz, '}');
+        if(content.back() == ',')
+            content.back() = '}';
+        else
+            content.append(1uz, '}');
+        content.shrink_to_fit();
         return content;
     }
 }
