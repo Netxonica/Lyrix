@@ -1,0 +1,57 @@
+{
+    "version": "0.2.0",
+    "configurations":
+    [
+        {
+            "name": "Debug Lyrix (GDB)",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${env:LYRIX_GDB_PATH}",
+            "cwd": "${workspaceFolder}",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "Build Lyrix (Debug)",
+            "setupCommands":
+            [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set disassembly flavor to Intel (optional)",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "program": "Lyrix",
+            "windows":
+            {
+                "program": "Lyrix.exe"
+            },
+            "linux":
+            {
+                "program": "Lyrix"
+            }
+        },
+        {
+            "name": "Debug Lyrix (LLDB)",
+            "type": "lldb-dap",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build Lyrix (Debug)",
+            "args": [],
+            "stopOnEntry": false,
+            "program": "Lyrix",
+            "windows":
+            {
+                "program": "Lyrix.exe"
+            },
+            "linux":
+            {
+                "program": "Lyrix"
+            }
+        }
+    ]
+}
