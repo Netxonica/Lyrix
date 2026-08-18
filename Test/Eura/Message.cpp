@@ -12,7 +12,7 @@
         return false;
     nlohmann::json response;
     Eura::to_json(response, request);
-    return response.dump() == content;
+    return response.dump() == root.dump();
 }
 
 int main()
