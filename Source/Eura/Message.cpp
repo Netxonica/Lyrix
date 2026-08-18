@@ -4,14 +4,14 @@
 
 namespace Eura
 {
-    auto Deserialize(const Json::Object& object, Message& message) noexcept -> void
+    auto from_json(const nlohmann::json& object, Message& message) noexcept -> void
     {
-        message.jsonrpc = object.Retrieve("jsonrpc").As<Json::String>();
+        message.jsonrpc = object.at("jsonrpc").get<std::string>();
     }
 
-    auto Serialize(Json::Object& object, const Message& message) noexcept -> void
+    auto to_json(nlohmann::json& object, const Message& message) noexcept -> void
     {
-        object.fields.emplace_back("jsonrpc", message.jsonrpc);
+        object["jsonrpc"] = message.jsonrpc;
     }
 }
 

@@ -5,7 +5,7 @@
 
 namespace Eura
 {
-    auto Listen() noexcept -> void;
+    [[noreturn]] auto Listen() noexcept -> void;
 }
 
 #endif

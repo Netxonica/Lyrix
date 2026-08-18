@@ -2,18 +2,18 @@
 #if lyrix_major >= 0 and lyrix_middle >= 0 and lyrix_minor >= 1
 #ifndef lyrix_header_guard_eura_message
 #define lyrix_header_guard_eura_message
-#include "Eura/Any.hpp"
+#include "Eura/Json.hpp"
 
 namespace Eura
 {
-    struct [[nodiscard]] Message
+    struct [[nodiscard]] Message final
     {
-        Json::String jsonrpc;
+        std::string jsonrpc;
     };
 
-    auto Deserialize(const Json::Object& object, Message& message) noexcept -> void;
+    auto from_json(const nlohmann::json& object, Message& message) noexcept -> void;
 
-    auto Serialize(Json::Object& object, const Message& message) noexcept -> void;
+    auto to_json(nlohmann::json& object, const Message& message) noexcept -> void;
 }
 
 #endif
