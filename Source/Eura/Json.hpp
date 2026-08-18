@@ -27018,4 +27018,8 @@ struct formatter<nlohmann::NLOHMANN_BASIC_JSON_TPL, char> // NOLINT(cert-dcl58-c
     #pragma GCC diagnostic pop
 #endif
 
+#ifdef _MSC_VER
+#include <variant>
+#endif
+
 #endif  // INCLUDE_NLOHMANN_JSON_HPP_
