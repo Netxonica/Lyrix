@@ -9,6 +9,10 @@ namespace Eura
     struct [[nodiscard]] RequestMessage final : Message
     {
         std::variant<std::int32_t, std::string> id;
+
+        std::string method;
+
+        std::optional<nlohmann::json> params;
     };
 
     auto from_json(const nlohmann::json& object, RequestMessage& request_message) noexcept -> void;

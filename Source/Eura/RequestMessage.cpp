@@ -12,6 +12,9 @@ namespace Eura
             request_message.id = id.get<std::int32_t>();
         else
             request_message.id = id.get<std::string>();
+        request_message.method = object.at("method").get<std::string>();
+        if(object.contains("params"))
+            request_message.params = object.at("params");
     }
 
     auto to_json(nlohmann::json& object, const RequestMessage& request_message) noexcept -> void
@@ -21,6 +24,9 @@ namespace Eura
         {
             object["id"] = id;
         }, request_message.id);
+        object["method"] = request_message.method;
+        if(request_message.params.has_value())
+            object["params"] = *request_message.params;
     }
 }
 

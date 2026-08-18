@@ -4,12 +4,17 @@
 
 [[nodiscard]] auto lyrix_test() noexcept -> bool
 {
-    const std::string content = "{\"jsonrpc\":\"2.0\",\"id\":\"nya\"}";
+    const std::string content = "{\"jsonrpc\":\"2.0\",\"id\":\"nya\",\"method\":\"meow\",\"params\":{\"jsonrpc\":\"2.0\"}}";
     const nlohmann::json root = nlohmann::json::parse(content);
     Eura::RequestMessage request;
     Eura::from_json(root, request);
     if(request.jsonrpc not_eq "2.0" or not std::holds_alternative<std::string>(request.id) or std::
-    get<std::string>(request.id) not_eq "nya")
+    get<std::string>(request.id) not_eq "nya" or request.method not_eq "meow" or not request.params
+    .has_value())
+        return false;
+    Eura::Message message;
+    Eura::from_json(*request.params, message);
+    if(message.jsonrpc not_eq "2.0")
         return false;
     nlohmann::json response;
     Eura::to_json(response, request);
