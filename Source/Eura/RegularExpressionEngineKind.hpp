@@ -8,7 +8,7 @@ namespace Eura
 {
     using RegularExpressionEngineKind = std::string;
 
-    inline const constexpr RegularExpressionEngineKind ES2020 = "ES2020";
+    inline const RegularExpressionEngineKind ES2020 = "ES2020";
 }
 
 #endif
