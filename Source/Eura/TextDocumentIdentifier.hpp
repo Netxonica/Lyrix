@@ -7,7 +7,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] TextDocumentIdentifier final
+    struct [[nodiscard]] TextDocumentIdentifier
     {
         DocumentUri uri;
     };
