@@ -17,6 +17,8 @@ namespace Eura
             response_message.id = nullptr;
         if(object.contains("result"))
             response_message.result = object.at("result");
+        if(object.contains("error"))
+            response_message.error = object.at("error").get<ResponseError>();
     }
 
     auto to_json(nlohmann::json& object, const ResponseMessage& response_message) noexcept -> void
@@ -28,6 +30,8 @@ namespace Eura
         }, response_message.id);
         if(response_message.result.has_value())
             object["result"] = *response_message.result;
+        if(response_message.error.has_value())
+            object["error"] = *response_message.error;
     }
 }
 
