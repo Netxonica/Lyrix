@@ -6,7 +6,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] Message final
+    struct [[nodiscard]] Message
     {
         std::string jsonrpc;
     };
