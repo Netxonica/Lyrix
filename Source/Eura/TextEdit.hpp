@@ -6,7 +6,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] TextEdit final
+    struct [[nodiscard]] TextEdit
     {
         Range range;
 
