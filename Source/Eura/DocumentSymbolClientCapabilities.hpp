@@ -10,6 +10,14 @@ namespace Eura
     struct [[nodiscard]] DocumentSymbolClientCapabilities final
     {
         std::optional<bool> dynamicRegistration;
+
+        std::optional<ClientSymbolKindOptions> symbolKind;
+
+        std::optional<bool> hierarchicalDocumentSymbolSupport;
+
+        std::optional<ClientSymbolTagOptions> tagSupport;
+
+        std::optional<bool> labelSupport;
     };
 
     auto from_json(const nlohmann::json& object, DocumentSymbolClientCapabilities&
