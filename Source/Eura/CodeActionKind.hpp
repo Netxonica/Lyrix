@@ -8,7 +8,7 @@ namespace Eura
 {
     using CodeActionKind = std::string;
 
-    inline const CodeActionKind Empty = "", QuickFix = "quickfix", Refactor = "refactor",
+    inline const CodeActionKind KEmpty = "", QuickFix = "quickfix", Refactor = "refactor",
     RefactorExtract = "refactor.extract", RefactorInline = "refactor.inline", RefactorMove =
     "refactor.move", RefactorRewrite = "refactor.rewrite", Source = "source", SourceOrganizeImports
     = "source.organizeImports", SourceFixAll = "source.fixAll", Notebook = "notebook";
