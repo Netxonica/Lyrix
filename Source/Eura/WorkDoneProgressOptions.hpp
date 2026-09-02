@@ -6,7 +6,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] WorkDoneProgressOptions final
+    struct [[nodiscard]] WorkDoneProgressOptions
     {
         std::optional<bool> workDoneProgress;
     };
