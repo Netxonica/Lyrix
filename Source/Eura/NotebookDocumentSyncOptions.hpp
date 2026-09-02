@@ -6,7 +6,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] NotebookDocumentSyncOptions final
+    struct [[nodiscard]] NotebookDocumentSyncOptions
     {
         std::vector<NotebookDocumentFilterWithNotebook> notebookSelector;
 

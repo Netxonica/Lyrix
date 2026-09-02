@@ -6,7 +6,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] StaticRegistrationOptions final
+    struct [[nodiscard]] StaticRegistrationOptions
     {
         std::optional<std::string> id;
     };
