@@ -7,7 +7,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] WorkDoneProgressParams final
+    struct [[nodiscard]] WorkDoneProgressParams
     {
         std::optional<ProgressToken> workDoneToken;
     };
