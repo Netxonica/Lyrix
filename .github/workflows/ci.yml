@@ -141,6 +141,10 @@ jobs:
       - name: Install Ninja
         run: pacman -S --noconfirm ninja
         shell: bash
+
+      - name: Install Node dependencies
+        run: cd Source/Aura && npm install && cd ../..
+        shell: bash
       
       - name: CMake GCC debug configuration
         run: cmake -B Build/Debug -S . -G Ninja -D CMAKE_BUILD_TYPE=Debug
