@@ -6,7 +6,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] TypeDefinitionOptions final : WorkDoneProgressOptions{};
+    struct [[nodiscard]] TypeDefinitionOptions : WorkDoneProgressOptions{};
 
     auto from_json(const nlohmann::json& object, TypeDefinitionOptions& type_definition_options)
     noexcept -> void;
