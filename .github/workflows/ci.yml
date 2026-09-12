@@ -134,6 +134,10 @@ jobs:
         run: pacman -S --noconfirm base-devel
         shell: bash
 
+      - name: Install node
+        run: pacman -S --noconfirm nodejs npm
+        shell: bash
+
       - name: Install CMake
         run: pacman -S --noconfirm cmake
         shell: bash
