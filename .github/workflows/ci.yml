@@ -68,7 +68,7 @@ jobs:
           arch: x64
 
       - name: Install CMake
-        run: Invoke-WebRequest -Uri "https://github.com/Kitware/CMake/releases/download/v4.4.2/cmake-4.4.2-windows-x86_64.zip" -OutFile cmake.zip
+        run: Invoke-WebRequest -Uri "https://github.com/Kitware/CMake/releases/download/v4.4.3/cmake-4.4.3-windows-x86_64.zip" -OutFile cmake.zip
         shell: powershell
       
       - name: Extract CMake
@@ -76,7 +76,7 @@ jobs:
         shell: powershell
       
       - name: Add CMake to PATH
-        run: echo "C:\CMake\cmake-4.4.2-windows-x86_64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        run: echo "C:\CMake\cmake-4.4.3-windows-x86_64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
         shell: powershell
 
       - name: Install Node dependencies
@@ -114,72 +114,54 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: gcc:16
-
+      image: archlinux:latest
+    
     steps:
       - name: Checkout source
         uses: actions/checkout@v7.0.1
 
-      - name: Update APT
-        run: apt-get update -y
-        shell: bash
-
-      - name: Upgrade APT
-        run: apt-get full-upgrade -y
-        shell: bash
-
-      - name: Remove APT
-        run: apt-get autoremove -y
+      - name: Initialize key
+        run: |
+          pacman-key --init
+          pacman-key --populate archlinux
         shell: bash
       
-      - name: Clear APT
-        run: apt-get autoclean -y
+      - name: Update system
+        run: pacman -Syu --noconfirm
         shell: bash
 
-      - name: Acquire CMake
-        run: wget -O cmake.sh https://github.com/Kitware/CMake/releases/download/v4.4.2/cmake-4.4.2-linux-x86_64.sh
-        shell: bash
-
-      - name: Install privileges
-        run: chmod +x cmake.sh
+      - name: Install base
+        run: pacman -S --noconfirm base-devel
         shell: bash
 
       - name: Install CMake
-        run: ./cmake.sh --skip-license --prefix=/usr/local
+        run: pacman -S --noconfirm cmake
         shell: bash
 
       - name: Install Ninja
-        run: apt-get install -y ninja-build
-        shell: bash
-
-      - name: Install Node
-        run: apt-get install -y nodejs npm
-        shell: bash
-
-      - name: Install Node dependencies
-        run: cd Source/Aura && npm install && cd ../..
+        run: pacman -S --noconfirm ninja
         shell: bash
       
-      - name: CMake clang debug configuration
+      - name: CMake GCC debug configuration
         run: cmake -B Build/Debug -S . -G Ninja -D CMAKE_BUILD_TYPE=Debug
         shell: bash
 
-      - name: CMake clang debug symlink
+      - name: CMake GCC debug symlink
         run: ninja create_symlink -C Build/Debug
         shell: bash
 
-      - name: Ninja clang debug compilation
+      - name: Ninja GCC debug compilation
         run: ninja -C Build/Debug
         shell: bash
       
-      - name: CMake clang release configuration
+      - name: CMake GCC release configuration
         run: cmake -B Build/Release -S . -G Ninja -D CMAKE_BUILD_TYPE=Release
         shell: bash
 
-      - name: CMake clang release symlink
+      - name: CMake GCC release symlink
         run: ninja create_symlink -C Build/Release
         shell: bash
 
-      - name: Ninja clang release compilation
+      - name: Ninja GCC release compilation
         run: ninja -C Build/Release
         shell: bash
