@@ -8,7 +8,8 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] SelectionRangeRegistrationOptions final : SelectionRangeOptions{};
+    struct [[nodiscard]] SelectionRangeRegistrationOptions final : SelectionRangeOptions,
+    TextDocumentRegistrationOptions, StaticRegistrationOptions{};
 
     auto from_json(const nlohmann::json& object, SelectionRangeRegistrationOptions&
     selection_range_registration_options) noexcept -> void;
