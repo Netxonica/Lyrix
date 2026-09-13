@@ -6,7 +6,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] DocumentColorOptions final : WorkDoneProgressOptions{};
+    struct [[nodiscard]] DocumentColorOptions : WorkDoneProgressOptions{};
 
     auto from_json(const nlohmann::json& object, DocumentColorOptions& document_color_options)
     noexcept -> void;
