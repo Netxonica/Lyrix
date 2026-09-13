@@ -6,7 +6,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] FoldingRangeOptions final : WorkDoneProgressOptions{};
+    struct [[nodiscard]] FoldingRangeOptions : WorkDoneProgressOptions{};
 
     auto from_json(const nlohmann::json& object, FoldingRangeOptions& folding_range_options)
     noexcept -> void;
