@@ -9,7 +9,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] SemanticTokensOptions final : WorkDoneProgressOptions
+    struct [[nodiscard]] SemanticTokensOptions : WorkDoneProgressOptions
     {
         SemanticTokensLegend legend;
 
