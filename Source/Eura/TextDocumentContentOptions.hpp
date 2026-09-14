@@ -6,7 +6,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] TextDocumentContentOptions final
+    struct [[nodiscard]] TextDocumentContentOptions
     {
         std::vector<std::string> schemes;
     };
