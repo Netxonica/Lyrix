@@ -38,6 +38,7 @@
     has_value() or not std::holds_alternative<Eura::RelativePattern>(*notebook_document_filter.
     pattern))
         return false;
+    {
     const Eura::RelativePattern& relative_pattern = std::get<Eura::RelativePattern>(*
     notebook_document_filter.pattern);
     if(not std::holds_alternative<Eura::WorkspaceFolder>(relative_pattern.baseUri))
@@ -93,6 +94,7 @@
     "meow.lyrix" or not text_document_filter.pattern.has_value() or not std::holds_alternative<Eura
     ::RelativePattern>(*text_document_filter.pattern))
         return false;
+    }
     {
     const Eura::RelativePattern& relative_pattern = std::get<Eura::RelativePattern>(*
     text_document_filter.pattern);
