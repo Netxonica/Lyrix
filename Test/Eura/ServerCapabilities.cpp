@@ -5,7 +5,7 @@
 
 [[nodiscard]] auto lyrix_test() noexcept -> bool
 {
-    const std::string content = "{\"positionEncoding\":\"utf-8\",\"textDocumentSync\":{\"openClose\":true,\"change\":2},\"notebookDocumentSync\":{\"notebookSelector\":[{\"notebook\":{\"notebookType\":\"lyrix\",\"scheme\":\"meow.lyrix\",\"pattern\":{\"baseUri\":{\"uri\":\"meow.extension\",\"name\":\"meow nya\"},\"pattern\":\"*.extension\"}},\"cells\":[{\"language\":\"lyrix\"}]}],\"save\":true,\"id\":\"meow\"},\"completionProvider\":{\"workDoneProgress\":true,\"triggerCharacters\":[\"meow\"],\"allCommitCharacters\":[\"nya\"],\"resolveProvider\":true,\"completionItem\":{\"labelDetailsSupport\":true}},\"hoverProvider\":{\"workDoneProgress\":true},\"signatureHelpProvider\":{\"workDoneProgress\":true,\"triggerCharacters\":[\"meow\"],\"retriggerCharacters\":[\"nya\"]},\"declarationProvider\":{\"workDoneProgress\":true,\"documentSelector\":[{\"language\":\"lyrix\",\"scheme\":\"meow.lyrix\",\"pattern\":{\"baseUri\":{\"uri\":\"meow.extension\",\"name\":\"meow nya\"},\"pattern\":\"*.extension\"}},{\"notebook\":{\"notebookType\":\"lyrix\",\"scheme\":\"meow.lyrix\",\"pattern\":{\"baseUri\":{\"uri\":\"meow.extension\",\"name\":\"meow nya\"},\"pattern\":\"*.extension\"}},\"language\":\"lyrix\"}],\"id\":\"meow\"},\"definitionProvider\":{\"workDoneProgress\":true},\"typeDefinitionProvider\":true,\"implementationProvider\":true,\"referenceProvider\":true,\"documentHighlightProvider\":true,\"documentSymbolProvider\":true,\"codeActionProvider\":true,\"codeLensProvider\":{\"workDoneProgress\":true,\"resolveProvider\":true},\"documentLinkProvider\":{\"workDoneProgress\":true,\"resolveProvider\":true},\"colorProvider\":true,\"documentFormattingProvider\":true,\"documentRangeFormattingProvider\":true,\"documentOnTypeFormattingProvider\":{\"firstTriggerCharacter\":\"meow\",\"moreTriggerCharacter\":[\"nya\"]},\"renameProvider\":true,\"foldingRangeProvider\":true,\"executeCommandProvider\":{\"workDoneProgress\":true,\"commands\":[]},\"selectionRangeProvider\":true,\"linkedEditingRangeProvider\":true,\"callHierarchyProvider\":true,\"semanticTokensProvider\":{\"workDoneProgress\":true,\"legend\":{\"tokenTypes\":[\"meow\"],\"tokenModifiers\":[\"nya\"]},\"range\":{},\"full\":{\"delta\":true}},\"monikerProvider\":true,\"typeHierarchyProvider\":true,\"inlineValueProvider\":true,\"inlayHintProvider\":true,\"diagnosticProvider\":{\"workDoneProgress\":true,\"identifier\":\"meow\",\"interFileDependencies\":true,\"workspaceDiagnostics\":true},\"workspaceSymbolProvider\":true,\"inlineCompletionProvider\":true,\"experimental\":{\"jsonrpc\":\"2.0\"}}";
+    const std::string content = "{\"positionEncoding\":\"utf-8\",\"textDocumentSync\":{\"openClose\":true,\"change\":2},\"notebookDocumentSync\":{\"notebookSelector\":[{\"notebook\":{\"notebookType\":\"lyrix\",\"scheme\":\"meow.lyrix\",\"pattern\":{\"baseUri\":{\"uri\":\"meow.extension\",\"name\":\"meow nya\"},\"pattern\":\"*.extension\"}},\"cells\":[{\"language\":\"lyrix\"}]}],\"save\":true},\"completionProvider\":{\"workDoneProgress\":true,\"triggerCharacters\":[\"meow\"],\"allCommitCharacters\":[\"nya\"],\"resolveProvider\":true,\"completionItem\":{\"labelDetailsSupport\":true}},\"hoverProvider\":true,\"signatureHelpProvider\":{\"workDoneProgress\":true,\"triggerCharacters\":[\"meow\"],\"retriggerCharacters\":[\"nya\"]},\"declarationProvider\":true,\"definitionProvider\":true,\"typeDefinitionProvider\":true,\"implementationProvider\":true,\"referenceProvider\":true,\"documentHighlightProvider\":true,\"documentSymbolProvider\":true,\"codeActionProvider\":true,\"codeLensProvider\":{\"workDoneProgress\":true,\"resolveProvider\":true},\"documentLinkProvider\":{\"workDoneProgress\":true,\"resolveProvider\":true},\"colorProvider\":true,\"documentFormattingProvider\":true,\"documentRangeFormattingProvider\":true,\"documentOnTypeFormattingProvider\":{\"firstTriggerCharacter\":\"meow\",\"moreTriggerCharacter\":[\"nya\"]},\"renameProvider\":true,\"foldingRangeProvider\":true,\"executeCommandProvider\":{\"workDoneProgress\":true,\"commands\":[]},\"selectionRangeProvider\":true,\"linkedEditingRangeProvider\":true,\"callHierarchyProvider\":true,\"semanticTokensProvider\":{\"workDoneProgress\":true,\"legend\":{\"tokenTypes\":[\"meow\"],\"tokenModifiers\":[\"nya\"]},\"range\":{},\"full\":{\"delta\":true}},\"monikerProvider\":true,\"typeHierarchyProvider\":true,\"inlineValueProvider\":true,\"inlayHintProvider\":true,\"diagnosticProvider\":{\"workDoneProgress\":true,\"identifier\":\"meow\",\"interFileDependencies\":true,\"workspaceDiagnostics\":true},\"workspaceSymbolProvider\":true,\"inlineCompletionProvider\":true,\"experimental\":{\"jsonrpc\":\"2.0\"}}";
     const nlohmann::json root = nlohmann::json::parse(content);
     Eura::ServerCapabilities request;
     Eura::from_json(root, request);
@@ -18,11 +18,11 @@
     if(not textDocumentSync.openClose.has_value() or not *textDocumentSync.openClose or not
     textDocumentSync.change.has_value() or *textDocumentSync.change not_eq Eura::
     TextDocumentSyncKind::Incremental or not request.notebookDocumentSync.has_value() or not std::
-    holds_alternative<Eura::NotebookDocumentSyncRegistrationOptions>(*request.notebookDocumentSync)
+    holds_alternative<Eura::NotebookDocumentSyncOptions>(*request.notebookDocumentSync)
     )
         return false;
-    const Eura::NotebookDocumentSyncRegistrationOptions& notebookDocumentSync = std::get<Eura::
-    NotebookDocumentSyncRegistrationOptions>(*request.notebookDocumentSync);
+    const Eura::NotebookDocumentSyncOptions& notebookDocumentSync = std::get<Eura::
+    NotebookDocumentSyncOptions>(*request.notebookDocumentSync);
     if(notebookDocumentSync.notebookSelector.size() not_eq 1uz)
         return false;
     const Eura::NotebookDocumentFilterWithNotebook& notebook_selector = notebookDocumentSync.
@@ -38,7 +38,6 @@
     has_value() or not std::holds_alternative<Eura::RelativePattern>(*notebook_document_filter.
     pattern))
         return false;
-    {
     const Eura::RelativePattern& relative_pattern = std::get<Eura::RelativePattern>(*
     notebook_document_filter.pattern);
     if(not std::holds_alternative<Eura::WorkspaceFolder>(relative_pattern.baseUri))
@@ -49,95 +48,33 @@
     relative_pattern.pattern not_eq "*.extension" or not notebook_selector.cells.has_value() or
     notebook_selector.cells->size() not_eq 1uz or (*notebook_selector.cells)[0uz].language not_eq
     "lyrix" or not notebookDocumentSync.save.has_value() or not *notebookDocumentSync.save or not
-    notebookDocumentSync.id.has_value() or *notebookDocumentSync.id not_eq "meow" or not request.
-    completionProvider.has_value() or not request.completionProvider->workDoneProgress.has_value()
-    or not *request.completionProvider->workDoneProgress or not request.completionProvider->
-    triggerCharacters.has_value() or request.completionProvider->triggerCharacters->size() not_eq
-    1uz or (*request.completionProvider->triggerCharacters)[0uz] not_eq "meow" or not request.
-    completionProvider->allCommitCharacters.has_value() or request.completionProvider->
-    allCommitCharacters->size() not_eq 1uz or (*request.completionProvider->allCommitCharacters)[
-    0uz] not_eq "nya" or not request.completionProvider->resolveProvider.has_value() or not *
-    request.completionProvider->resolveProvider or not request.completionProvider->completionItem.
-    has_value() or not request.completionProvider->completionItem->labelDetailsSupport.has_value()
-    or not *request.completionProvider->completionItem->labelDetailsSupport or not request.
-    hoverProvider.has_value() or not std::holds_alternative<Eura::HoverOptions>(*request.
-    hoverProvider))
-        return false;
-    const Eura::HoverOptions& hoverProvider = std::get<Eura::HoverOptions>(*request.hoverProvider);
-    if(not hoverProvider.workDoneProgress.has_value() or not *hoverProvider.workDoneProgress or not
-    request.signatureHelpProvider.has_value() or not request.signatureHelpProvider->
+    request.completionProvider.has_value() or not request.completionProvider->workDoneProgress.
+    has_value() or not *request.completionProvider->workDoneProgress or not request.
+    completionProvider->triggerCharacters.has_value() or request.completionProvider->
+    triggerCharacters->size() not_eq 1uz or (*request.completionProvider->triggerCharacters)[0uz]
+    not_eq "meow" or not request.completionProvider->allCommitCharacters.has_value() or request.
+    completionProvider->allCommitCharacters->size() not_eq 1uz or (*request.completionProvider->
+    allCommitCharacters)[0uz] not_eq "nya" or not request.completionProvider->resolveProvider.
+    has_value() or not *request.completionProvider->resolveProvider or not request.
+    completionProvider->completionItem.has_value() or not request.completionProvider->
+    completionItem->labelDetailsSupport.has_value() or not *request.completionProvider->
+    completionItem->labelDetailsSupport or not request.hoverProvider.has_value() or not std::
+    holds_alternative<bool>(*request.hoverProvider) or not std::get<bool>(*request.hoverProvider)
+    or not request.signatureHelpProvider.has_value() or not request.signatureHelpProvider->
     workDoneProgress.has_value() or not *request.signatureHelpProvider->workDoneProgress or not
     request.signatureHelpProvider->triggerCharacters.has_value() or request.signatureHelpProvider->
     triggerCharacters->size() not_eq 1uz or (*request.signatureHelpProvider->triggerCharacters)[0uz
     ] not_eq "meow" or not request.signatureHelpProvider->retriggerCharacters.has_value() or
     request.signatureHelpProvider->retriggerCharacters->size() not_eq 1uz or (*request.
     signatureHelpProvider->retriggerCharacters)[0uz] not_eq "nya" or not request.
-    declarationProvider.has_value() or not std::holds_alternative<Eura::
-    DeclarationRegistrationOptions>(*request.declarationProvider))
-        return false;
-    const Eura::DeclarationRegistrationOptions& declarationProvider = std::get<Eura::
-    DeclarationRegistrationOptions>(*request.declarationProvider);
-    if(not declarationProvider.workDoneProgress.has_value() or not *declarationProvider.
-    workDoneProgress or not std::holds_alternative<Eura::DocumentSelector>(declarationProvider.
-    documentSelector))
-        return false;
-    const Eura::DocumentSelector& documentSelector = std::get<Eura::DocumentSelector>(
-    declarationProvider.documentSelector);
-    if(documentSelector.size() not_eq 2uz or not std::holds_alternative<Eura::TextDocumentFilter>(
-    documentSelector[0uz]) or not std::holds_alternative<Eura::NotebookCellTextDocumentFilter>(
-    documentSelector[1uz]))
-        return false;
-    const Eura::TextDocumentFilter& text_document_filter = std::get<Eura::TextDocumentFilter>(
-    documentSelector[0uz]);
-    if(not text_document_filter.language.has_value() or *text_document_filter.language not_eq
-    "lyrix" or not text_document_filter.scheme.has_value() or *text_document_filter.scheme not_eq
-    "meow.lyrix" or not text_document_filter.pattern.has_value() or not std::holds_alternative<Eura
-    ::RelativePattern>(*text_document_filter.pattern))
-        return false;
-    }
-    {
-    const Eura::RelativePattern& relative_pattern = std::get<Eura::RelativePattern>(*
-    text_document_filter.pattern);
-    if(not std::holds_alternative<Eura::WorkspaceFolder>(relative_pattern.baseUri))
-        return false;
-    const Eura::WorkspaceFolder& workspace_folder = std::get<Eura::WorkspaceFolder>(
-    relative_pattern.baseUri);
-    if(workspace_folder.uri not_eq "meow.extension" or workspace_folder.name not_eq "meow nya" or
-    relative_pattern.pattern not_eq "*.extension")
-        return false;
-    const Eura::NotebookCellTextDocumentFilter& notebook_cell_text_document_filter = std::get<Eura
-    ::NotebookCellTextDocumentFilter>(documentSelector[1uz]);
-    if(not std::holds_alternative<Eura::NotebookDocumentFilter>(notebook_cell_text_document_filter.
-    notebook))
-        return false;
-    const Eura::NotebookDocumentFilter& notebook = std::get<Eura::NotebookDocumentFilter>(
-    notebook_cell_text_document_filter.notebook);
-    if(not notebook.notebookType.has_value() or *notebook.notebookType not_eq "lyrix" or not
-    notebook.scheme.has_value() or *notebook.scheme not_eq "meow.lyrix" or not notebook.pattern.
-    has_value() or not std::holds_alternative<Eura::RelativePattern>(*notebook.pattern))
-        return false;
-    const Eura::RelativePattern& rrelative_pattern = std::get<Eura::RelativePattern>(*notebook.
-    pattern);
-    if(not std::holds_alternative<Eura::WorkspaceFolder>(rrelative_pattern.baseUri))
-        return false;
-    const Eura::WorkspaceFolder& wworkspace_folder = std::get<Eura::WorkspaceFolder>(
-    rrelative_pattern.baseUri);
-    if(wworkspace_folder.uri not_eq "meow.extension" or wworkspace_folder.name not_eq "meow nya" or
-    rrelative_pattern.pattern not_eq "*.extension" or not notebook_cell_text_document_filter.
-    language.has_value() or *notebook_cell_text_document_filter.language not_eq "lyrix" or not
-    declarationProvider.id.has_value() or *declarationProvider.id not_eq "meow" or not request.
-    definitionProvider.has_value() or not std::holds_alternative<Eura::DefinitionOptions>(*request.
-    definitionProvider))
-        return false;
-    }
-    const Eura::DefinitionOptions& definitionProvider = std::get<Eura::DefinitionOptions>(*request.
-    definitionProvider);
-    if(not definitionProvider.workDoneProgress.has_value() or not *definitionProvider.
-    workDoneProgress or not request.typeDefinitionProvider.has_value() or not std::
-    holds_alternative<bool>(*request.typeDefinitionProvider) or not std::get<bool>(*request.
-    typeDefinitionProvider) or not request.implementationProvider.has_value() or not std::
-    holds_alternative<bool>(*request.implementationProvider) or not std::get<bool>(*request.
-    implementationProvider) or not request.referenceProvider.has_value() or not std::
+    declarationProvider.has_value() or not std::holds_alternative<bool>(*request.
+    declarationProvider) or not std::get<bool>(*request.declarationProvider) or not request.
+    definitionProvider.has_value() or not std::holds_alternative<bool>(*request.definitionProvider)
+    or not std::get<bool>(*request.definitionProvider) or not request.typeDefinitionProvider.
+    has_value() or not std::holds_alternative<bool>(*request.typeDefinitionProvider) or not std::
+    get<bool>(*request.typeDefinitionProvider) or not request.implementationProvider.has_value() or
+    not std::holds_alternative<bool>(*request.implementationProvider) or not std::get<bool>(*
+    request.implementationProvider) or not request.referenceProvider.has_value() or not std::
     holds_alternative<bool>(*request.referenceProvider) or not std::get<bool>(*request.
     referenceProvider) or not request.documentHighlightProvider.has_value() or not std::
     holds_alternative<bool>(*request.documentHighlightProvider) or not std::get<bool>(*request.
