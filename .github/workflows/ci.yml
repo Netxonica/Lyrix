@@ -8,9 +8,6 @@ jobs:
   macos_build:
     runs-on: macos-26
 
-    env:
-      HOMEBREW_NO_REQUIRE_TAP_TRUST: "1"
-
     steps:
       - name: Checkout source
         uses: actions/checkout@v7.0.1
@@ -90,7 +87,7 @@ jobs:
         run: cmake -B Build/Debug -S . -G Ninja -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=cl -D CMAKE_LINKER=link
         shell: powershell
 
-      - name: CMake clang debug symlink
+      - name: CMake MSVC debug symlink
         run: ninja create_symlink -C Build/Debug
         shell: powershell
 
@@ -102,7 +99,7 @@ jobs:
         run: cmake -B Build/Release -S . -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=cl -D CMAKE_LINKER=link
         shell: powershell
 
-      - name: CMake clang release symlink
+      - name: CMake MSVC release symlink
         run: ninja create_symlink -C Build/Release
         shell: powershell
 
