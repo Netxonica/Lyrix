@@ -4,7 +4,7 @@
 
 [[nodiscard]] auto lyrix_test() noexcept -> bool
 {
-    const std::string content = "{\"documentSelector\":[{\"language\":\"lyrix\",\"scheme\":\"meow.lyrix\",\"pattern\":{\"baseUri\":{\"uri\":\"meow.extension\",\"name\":\"meow nya\"},\"pattern\":\"*.extension\"}},{\"notebook\":{\"notebookType\":\"lyrix\",\"scheme\":\"meow.lyrix\",\"pattern\":{\"baseUri\":{\"uri\":\"meow.extension\",\"name\":\"meow nya\"},\"pattern\":\"*.extension\"}},\"language\":\"lyrix\"}]}";
+    const std::string content = "{\"documentSelector\":[{\"language\":\"lyrix\",\"scheme\":\"meow.lyrix\",\"pattern\":{\"baseUri\":{\"uri\":\"meow.extension\",\"name\":\"meow nya\"},\"pattern\":\"*.extension\"}},{\"notebook\":{\"notebookType\":\"lyrix\",\"scheme\":\"meow.lyrix\",\"pattern\":{\"baseUri\":{\"uri\":\"meow.extension\",\"name\":\"meow nya\"},\"pattern\":\"*.extension\"}},\"language\":\"lyrix\"}],\"includeText\":true}";
     const nlohmann::json root = nlohmann::json::parse(content);
     Eura::TextDocumentSaveRegistrationOptions request;
     Eura::from_json(root, request);
@@ -51,7 +51,8 @@
     rrelative_pattern.baseUri);
     if(wworkspace_folder.uri not_eq "meow.extension" or wworkspace_folder.name not_eq "meow nya" or
     rrelative_pattern.pattern not_eq "*.extension" or not notebook_cell_text_document_filter.
-    language.has_value() or *notebook_cell_text_document_filter.language not_eq "lyrix")
+    language.has_value() or *notebook_cell_text_document_filter.language not_eq "lyrix" or not
+    request.includeText.has_value() or not *request.includeText)
         return false;
     nlohmann::json response;
     Eura::to_json(response, request);

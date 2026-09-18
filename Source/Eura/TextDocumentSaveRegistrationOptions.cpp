@@ -9,6 +9,9 @@ namespace Eura
     {
         from_json(object, static_cast<TextDocumentRegistrationOptions&>(
         text_document_save_registration_options));
+        if(object.contains("includeText"))
+            text_document_save_registration_options.includeText = object.at("includeText").get<bool
+            >();
     }
 
     auto to_json(nlohmann::json& object, const TextDocumentSaveRegistrationOptions&
@@ -16,6 +19,8 @@ namespace Eura
     {
         to_json(object, static_cast<const TextDocumentRegistrationOptions&>(
         text_document_save_registration_options));
+        if(text_document_save_registration_options.includeText.has_value())
+            object["includeText"] = *text_document_save_registration_options.includeText;
     }
 }
 

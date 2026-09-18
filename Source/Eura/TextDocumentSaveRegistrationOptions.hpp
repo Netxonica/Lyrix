@@ -8,7 +8,9 @@ namespace Eura
 {
     struct [[nodiscard]] TextDocumentSaveRegistrationOptions final :
     TextDocumentRegistrationOptions
-    {};
+    {
+        std::optional<bool> includeText;
+    };
 
     auto from_json(const nlohmann::json& object, TextDocumentSaveRegistrationOptions&
     text_document_save_registration_options) noexcept -> void;
