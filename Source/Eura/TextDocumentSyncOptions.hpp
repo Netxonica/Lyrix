@@ -2,7 +2,7 @@
 #if lyrix_major >= 0 and lyrix_middle >= 0 and lyrix_minor >= 1
 #ifndef lyrix_header_guard_eura_text_document_sync_options
 #define lyrix_header_guard_eura_text_document_sync_options
-#include "Eura/Json.hpp"
+#include "Eura/SaveOptions.hpp"
 #include "Eura/TextDocumentSyncKind.hpp"
 
 namespace Eura
@@ -12,6 +12,10 @@ namespace Eura
         std::optional<bool> openClose;
 
         std::optional<TextDocumentSyncKind> change;
+
+        std::optional<bool> willSave, willSaveWaitUntil;
+
+        std::optional<std::variant<bool, SaveOptions>> save;
     };
 
     auto from_json(const nlohmann::json& object, TextDocumentSyncOptions&

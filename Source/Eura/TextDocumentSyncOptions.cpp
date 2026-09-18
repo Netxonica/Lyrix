@@ -11,6 +11,19 @@ namespace Eura
             text_document_sync_options.openClose = object.at("openClose").get<bool>();
         if(object.contains("change"))
             text_document_sync_options.change = object.at("change").get<TextDocumentSyncKind>();
+        if(object.contains("willSave"))
+            text_document_sync_options.willSave = object.at("willSave").get<bool>();
+        if(object.contains("willSaveWaitUntil"))
+            text_document_sync_options.willSaveWaitUntil = object.at("willSaveWaitUntil").get<bool>
+            ();
+        if(object.contains("save"))
+        {
+            const nlohmann::json& save = object.at("save");
+            if(save.is_boolean())
+                text_document_sync_options.save = save.get<bool>();
+            else
+                text_document_sync_options.save = save.get<SaveOptions>();
+        }
     }
 
     auto to_json(nlohmann::json& object, const TextDocumentSyncOptions& text_document_sync_options)
@@ -20,6 +33,15 @@ namespace Eura
             object["openClose"] = *text_document_sync_options.openClose;
         if(text_document_sync_options.change.has_value())
             object["change"] = *text_document_sync_options.change;
+        if(text_document_sync_options.willSave.has_value())
+            object["willSave"] = *text_document_sync_options.willSave;
+        if(text_document_sync_options.willSaveWaitUntil.has_value())
+            object["willSaveWaitUntil"] = *text_document_sync_options.willSaveWaitUntil;
+        if(text_document_sync_options.save.has_value())
+            std::visit([&object](auto&& save)
+            {
+                object["save"] = save;
+            }, *text_document_sync_options.save);
     }
 }
 
