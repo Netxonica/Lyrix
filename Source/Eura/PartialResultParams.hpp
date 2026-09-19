@@ -7,7 +7,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] PartialResultParams final
+    struct [[nodiscard]] PartialResultParams
     {
         std::optional<ProgressToken> partialResultToken;
     };

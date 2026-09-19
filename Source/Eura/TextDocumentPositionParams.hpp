@@ -7,7 +7,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] TextDocumentPositionParams final
+    struct [[nodiscard]] TextDocumentPositionParams
     {
         TextDocumentIdentifier textDocument;
 
