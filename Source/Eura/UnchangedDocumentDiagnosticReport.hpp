@@ -7,7 +7,7 @@
 
 namespace Eura
 {
-    struct [[nodiscard]] UnchangedDocumentDiagnosticReport final
+    struct [[nodiscard]] UnchangedDocumentDiagnosticReport
     {
         DocumentDiagnosticReportKind kind; // always Unchanged
 
