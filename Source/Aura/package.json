@@ -32,11 +32,11 @@
         ]
     },
     "engines": {
-        "vscode": "^1.138.0"
+        "vscode": "^1.140.0"
     },
     "dependencies": {
-        "@types/node": "^26.6.3",
-        "@types/vscode": "^1.138.0",
+        "@types/node": "^26.6.4",
+        "@types/vscode": "^1.140.0",
         "typescript": "^7.0.2",
         "vscode-languageclient": "^10.1.2",
         "vscode-languageserver-protocol": "^3.18.4"
