@@ -7,6 +7,7 @@
 #include <vector>
 #include <thread>
 #include <functional>
+#include <condition_variable>
 
 namespace Nyra
 {
