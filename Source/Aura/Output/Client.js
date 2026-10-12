@@ -16,31 +16,27 @@ async function activate(context) {
         return;
     else if (!folders[0].name.endsWith(".orion"))
         return;
-    else {
-        vscode_1.window.showInformationMessage("Running Aura (the official Lyrix LSP Client) for '" +
-            folders[0].name + "'...");
-        const serverPath = "Lyrix";
-        const serverOptions = {
-            run: {
-                command: serverPath,
-                transport: node_1.TransportKind.stdio,
-                args: ["lsp"]
-            },
-            debug: {
-                command: serverPath,
-                transport: node_1.TransportKind.stdio,
-                args: ["lsp"]
+    const serverPath = "Lyrix";
+    const serverOptions = {
+        run: {
+            command: serverPath,
+            transport: node_1.TransportKind.stdio,
+            args: ["lsp"]
+        },
+        debug: {
+            command: serverPath,
+            transport: node_1.TransportKind.stdio,
+            args: ["lsp"]
+        }
+    };
+    const clientOptions = {
+        documentSelector: [
+            {
+                scheme: "file",
+                language: "Elyra"
             }
-        };
-        const clientOptions = {
-            documentSelector: [
-                {
-                    scheme: "file",
-                    language: "Elyra"
-                }
-            ]
-        };
-        client = new node_1.LanguageClient("aura", "aura", serverOptions, clientOptions);
-        client.start();
-    }
+        ]
+    };
+    client = new node_1.LanguageClient("aura", "aura", serverOptions, clientOptions);
+    client.start();
 }

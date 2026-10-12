@@ -1,5 +1,5 @@
 import { ExtensionContext, workspace, window } from "vscode";
-import { LanguageClient, ServerOptions, TransportKind } from "vscode-languageclient/node";
+import { LanguageClient, ServerOptions, TransportKind, LanguageClientOptions} from "vscode-languageclient/node";
 
 let client: LanguageClient;
 
@@ -17,37 +17,32 @@ export async function activate(context: ExtensionContext)
         return;
     else if(!folders[0].name.endsWith(".orion"))
         return;
-    else
+    const serverPath = "Lyrix";
+    const serverOptions: ServerOptions =
     {
-        window.showInformationMessage("Running Aura (the official Lyrix LSP Client) for '" +
-        folders[0].name + "'...");
-        const serverPath = "Lyrix";
-        const serverOptions: ServerOptions =
+        run:
         {
-            run:
+            command: serverPath,
+            transport: TransportKind.stdio,
+            args: ["lsp"]
+        },
+        debug:
+        {
+            command: serverPath,
+            transport: TransportKind.stdio,
+            args: ["lsp"]
+        }
+    };
+    const clientOptions: LanguageClientOptions =
+    {
+        documentSelector:
+        [
             {
-                command: serverPath,
-                transport: TransportKind.stdio,
-                args: ["lsp"]
-            },
-            debug:
-            {
-                command: serverPath,
-                transport: TransportKind.stdio,
-                args: ["lsp"]
+                scheme: "file",
+                language: "Elyra"
             }
-        };
-        const clientOptions =
-        {
-            documentSelector:
-            [
-                {
-                    scheme: "file",
-                    language: "Elyra"
-                }
-            ]
-        };
-        client = new LanguageClient("aura", "aura", serverOptions, clientOptions);
-        client.start();
-    }
+        ]
+    };
+    client = new LanguageClient("aura", "aura", serverOptions, clientOptions);
+    client.start();
 }
