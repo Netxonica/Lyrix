@@ -22,10 +22,6 @@ namespace Nyra
                     *lexer.error() = project->Elyra();
                     lexer.error()->Report();
                 }
-                else
-                {
-                    Eura::Listen();
-                }
             }
         }
     }

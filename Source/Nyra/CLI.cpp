@@ -65,8 +65,13 @@ namespace Nyra::CLI
                 }
                 else if(command == "lsp")
                 {
-                    std::make_unique<Error>(8uz, name)->Report();
-                    Help();
+                    if(name not_eq "--stdio")
+                    {
+                        std::make_unique<Error>(8uz, name)->Report();
+                        Help();
+                    }
+                    else
+                        Eura::Listen();
                 }
                 else if(command == "create")
                 {
