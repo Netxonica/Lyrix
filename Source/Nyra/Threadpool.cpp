@@ -30,7 +30,7 @@ namespace Nyra
         PoolRun(pool);
     }
 
-    Threadpool::~Threadpool() noexcept
+    Threadpool::compl Threadpool() noexcept
     {
         {
             std::unique_lock<std::mutex> locked{m_mutex};

@@ -23,7 +23,21 @@ namespace Nyra
 
         std::vector<std::function<void()>> m_tasks;
     public:
-        ~Threadpool() noexcept;
+        compl Threadpool() noexcept;
+
+        explicit consteval Threadpool() noexcept = delete;
+
+        explicit consteval Threadpool(const Threadpool&) noexcept = delete;
+
+        explicit consteval Threadpool(Threadpool&&) noexcept = delete;
+
+        consteval auto operator=(const Threadpool&) noexcept -> Threadpool& = delete;
+
+        consteval auto operator=(Threadpool&&) noexcept -> Threadpool& = delete;
+
+        [[nodiscard]] consteval auto operator==(const Threadpool&) const noexcept -> bool = delete;
+
+        [[nodiscard]] consteval auto operator<=>(const Threadpool&) const noexcept = delete;
 
         Threadpool(const std::uint32_t workers) noexcept;
 
