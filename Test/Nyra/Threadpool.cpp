@@ -5,10 +5,10 @@
 [[nodiscard]] auto lyrix_test() noexcept -> bool
 {
     std::atomic_size_t counter = 0uz;
-    const std::size_t limit = std::thread::hardware_concurrency();
+    const std::uint32_t limit = std::thread::hardware_concurrency();
     {
-        Nyra::Threadpool pool{static_cast<const std::uint32_t>(limit)};
-        for(std::size_t i = 0uz; i < limit; ++i)
+        Nyra::Threadpool pool{limit};
+        for(std::uint32_t i = 0u; i < limit; ++i)
             pool += [&counter]
             {
                 ++counter;
