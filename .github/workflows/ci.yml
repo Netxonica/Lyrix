@@ -15,10 +15,6 @@ jobs:
       - name: Add Lyrix (Debug) as an environment variable
         run: /bin/zsh -i -c "echo \"Lyrix=Build/Debug/Lyrix\" >> \"$GITHUB_ENV\""
         shell: bash
-
-      - name: Add Lyrix (Release) as an environment variable
-        run: /bin/zsh -i -c "echo \"Lyrix=Build/Release/Lyrix\" >> \"$GITHUB_ENV\""
-        shell: bash
       
       - name: Update homebrew
         run: /bin/zsh -i -c "brew update && brew upgrade"
@@ -47,6 +43,10 @@ jobs:
       - name: CMake clang debug compilation
         run: /bin/zsh -i -c "ninja -C Build/Debug"
         shell: bash
+
+      - name: Add Lyrix (Release) as an environment variable
+        run: /bin/zsh -i -c "echo \"Lyrix=Build/Release/Lyrix\" >> \"$GITHUB_ENV\""
+        shell: bash
       
       - name: CMake clang release configuration
         run: /bin/zsh -i -c "cmake -B Build/Release -S . -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=/opt/homebrew/opt/llvm/bin/clang++ -D CMAKE_LINKER=/opt/homebrew/opt/lld/bin/lld"
@@ -74,10 +74,6 @@ jobs:
 
       - name: Add Lyrix (Debug) as an environment variable
         run: echo "Lyrix=$env:Build\Debug\Lyrix.exe" >> $env:GITHUB_ENV
-        shell: powershell
-
-      - name: Add Lyrix (Release) as an environment variable
-        run: echo "Lyrix=$env:Build\Release\Lyrix.exe" >> $env:GITHUB_ENV
         shell: powershell
 
       - name: Install CMake
@@ -110,6 +106,10 @@ jobs:
       - name: Ninja MSVC debug compilation
         run: ninja -C Build/Debug
         shell: powershell
+
+      - name: Add Lyrix (Release) as an environment variable
+        run: echo "Lyrix=$env:Build\Release\Lyrix.exe" >> $env:GITHUB_ENV
+        shell: powershell
       
       - name: CMake MSVC release configuration
         run: cmake -B Build/Release -S . -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=cl -D CMAKE_LINKER=link
@@ -135,10 +135,6 @@ jobs:
 
       - name: Add Lyrix (Debug) as an environment variable
         run: echo "Lyrix=Build/Debug/Lyrix" >> "$GITHUB_ENV"
-        shell: bash
-
-      - name: Add Lyrix (Release) as an environment variable
-        run: echo "Lyrix=Build/Release/Lyrix" >> "$GITHUB_ENV"
         shell: bash
 
       - name: Initialize key
@@ -181,6 +177,10 @@ jobs:
 
       - name: Ninja GCC debug compilation
         run: ninja -C Build/Debug
+        shell: bash
+
+      - name: Add Lyrix (Release) as an environment variable
+        run: echo "Lyrix=Build/Release/Lyrix" >> "$GITHUB_ENV"
         shell: bash
       
       - name: CMake GCC release configuration
