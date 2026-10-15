@@ -3,6 +3,7 @@
 #include "Nyra/Process.hpp"
 #ifndef lyrix_windows
 #include <fcntl.h>
+#include <sys/wait.h>
 #endif
 #include <cerrno>
 #include <memory>
