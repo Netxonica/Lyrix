@@ -222,6 +222,7 @@ namespace Nyra
             }
             break;
             case 20uz:
+            {
                 std::string message{"the compilation for "};
                 message += Lumina::Style::Data;
                 message += m_command;
@@ -231,6 +232,45 @@ namespace Nyra
                 message += m_base;
                 message += Lumina::Style::Normal;
                 message += " doesn't exist";
+                Print(message);
+            }
+            break;
+            case 21uz:
+            {
+                std::string message = "couldn't start the process given by ";
+                message += Lumina::Style::Data;
+                message += m_command;
+                message += Lumina::Style::Normal;
+                message += " because it couldn't be found as an environment variable";
+                Print(message);
+            }
+            break;
+            case 22uz:
+            {
+                std::string message = "couldn't create the pipes";
+                Print(message);
+            }
+            break;
+            case 23uz:
+            {
+                std::string message = "couldn't create the pipes of ";
+                message += Lumina::Style::Data;
+                message += m_command;
+                message += Lumina::Style::Normal;
+                Print(message);
+            }
+            break;
+            case 24uz:
+            {
+                std::string message = "couldn't create the child process given by ";
+                message += Lumina::Style::Data;
+                message += m_command;
+                message += Lumina::Style::Normal;
+                Print(message);
+            }
+            break;
+            case 25uz:
+                std::string message = "couldn't close the required pipe";
                 Print(message);
         }
     }

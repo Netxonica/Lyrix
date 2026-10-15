@@ -11,6 +11,14 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v7.0.1
+
+      - name: Add Lyrix (Debug) as an environment variable
+        run: /bin/zsh -i -c "echo \"Lyrix=Build/Debug/Lyrix\" >> \"$GITHUB_ENV\""
+        shell: bash
+
+      - name: Add Lyrix (Release) as an environment variable
+        run: /bin/zsh -i -c "echo \"Lyrix=Build/Release/Lyrix\" >> \"$GITHUB_ENV\""
+        shell: bash
       
       - name: Update homebrew
         run: /bin/zsh -i -c "brew update && brew upgrade"
@@ -64,6 +72,14 @@ jobs:
         with:
           arch: x64
 
+      - name: Add Lyrix (Debug) as an environment variable
+        run: echo "Lyrix=$env:Build\Debug\Lyrix.exe" >> $env:GITHUB_ENV
+        shell: powershell
+
+      - name: Add Lyrix (Release) as an environment variable
+        run: echo "Lyrix=$env:Build\Release\Lyrix.exe" >> $env:GITHUB_ENV
+        shell: powershell
+
       - name: Install CMake
         run: Invoke-WebRequest -Uri "https://github.com/Kitware/CMake/releases/download/v4.4.4/cmake-4.4.4-windows-x86_64.zip" -OutFile cmake.zip
         shell: powershell
@@ -116,6 +132,14 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v7.0.1
+
+      - name: Add Lyrix (Debug) as an environment variable
+        run: echo "Lyrix=Build/Debug/Lyrix" >> "$GITHUB_ENV"
+        shell: bash
+
+      - name: Add Lyrix (Release) as an environment variable
+        run: echo "Lyrix=Build/Release/Lyrix" >> "$GITHUB_ENV"
+        shell: bash
 
       - name: Initialize key
         run: |
