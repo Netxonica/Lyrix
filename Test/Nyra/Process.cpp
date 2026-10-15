@@ -6,14 +6,14 @@
 [[nodiscard]] auto lyrix_test() noexcept -> bool
 {
     {
-        const std::optional<Nyra::Process> process = Nyra::create_process(
+        const std::optional<Nyra::Process> process = Nyra::create_process("process_test", std::
+        vector<std::string>{
         #ifdef lyrix_windows
-        "powershell.exe", std::vector<std::string>{"-Command", "New-Item", "-ItemType", "Directory"
-        , "-Name", "\"nya\""}
+        "-Command", "New-Item", "-ItemType", "Directory", "-Name", "\"nya\""
         #else
-        "/bin/mkdir", std::vector<std::string>{"nya"}
+        "nya"
         #endif
-        );
+        });
         if(not process.has_value())
             return false;
     }
