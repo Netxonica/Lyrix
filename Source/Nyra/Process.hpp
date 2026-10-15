@@ -8,6 +8,7 @@
 #include <unistd.h>
 #endif
 #include <vector>
+#include <string>
 #include <optional>
 
 namespace Nyra
