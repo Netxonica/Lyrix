@@ -73,7 +73,7 @@ namespace Nyra
 
         [[nodiscard]] auto id() noexcept -> pid_t&;
         #endif
-        [[nodiscard]] auto read() noexcept -> std::string;
+        [[nodiscard]] auto read(std::string& content) noexcept -> bool;
 
         [[nodiscard]] auto write(std::string content) noexcept -> bool;
     };

@@ -107,12 +107,12 @@ namespace Nyra
         return m_id;
     }
     #endif
-    [[nodiscard]] auto Process::read() noexcept -> std::string
+    [[nodiscard]] auto Process::read(std::string&) noexcept -> bool
     {
         #ifdef lyrix_windows
         #else
         #endif
-        return "";
+        return true;
     }
 
     [[nodiscard]] auto Process::write(std::string) noexcept -> bool
