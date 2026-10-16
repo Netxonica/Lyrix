@@ -68,8 +68,8 @@ jobs:
         with:
           arch: x64
 
-      - name: Add mkdir as an environment variable
-        run: echo "process_test=$env:powershell.exe" >> $env:GITHUB_ENV
+      - name: Add powershell as an environment variable
+        run: echo "process_test=$PSHOME\powershell.exe" >> $env:GITHUB_ENV
         shell: powershell
 
       - name: Install CMake
